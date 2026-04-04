@@ -11,17 +11,11 @@ type Palette struct {
 	StatusKey        lipgloss.Style
 	StatusDesc       lipgloss.Style
 	StatusSep        lipgloss.Style
-	PRNumber         lipgloss.Style
-	PRTitle          lipgloss.Style
-	PRMeta           lipgloss.Style
+	StatusPass       lipgloss.Style
+	StatusFail       lipgloss.Style
+	StatusPending    lipgloss.Style
 	PreviewBorder    lipgloss.Style
 	PreviewContent   lipgloss.Style
-	StatusOpen       lipgloss.Style
-	StatusClosed     lipgloss.Style
-	StatusMerged     lipgloss.Style
-	ReviewApproved   lipgloss.Style
-	ReviewChanges    lipgloss.Style
-	ReviewRequired   lipgloss.Style
 	Notification     lipgloss.Style
 	NotificationInfo lipgloss.Style
 	NotificationWarn lipgloss.Style
@@ -40,12 +34,9 @@ type colors struct {
 	infoBg         lipgloss.Color
 	warnBg         lipgloss.Color
 	shadowFg       lipgloss.Color
-	statusOpen     lipgloss.Color
-	statusClosed   lipgloss.Color
-	statusMerged   lipgloss.Color
-	reviewApproved lipgloss.Color
-	reviewChanges  lipgloss.Color
-	reviewRequired lipgloss.Color
+	statusPass     lipgloss.Color
+	statusFail     lipgloss.Color
+	statusPending  lipgloss.Color
 }
 
 func NewPalette(darkBackground bool) *Palette {
@@ -67,12 +58,9 @@ func darkColors() colors {
 		infoBg:         lipgloss.Color("25"),
 		warnBg:         lipgloss.Color("124"),
 		shadowFg:       lipgloss.Color("#333333"),
-		statusOpen:     lipgloss.Color("2"),
-		statusClosed:   lipgloss.Color("5"),
-		statusMerged:   lipgloss.Color("4"),
-		reviewApproved: lipgloss.Color("2"),
-		reviewChanges:  lipgloss.Color("1"),
-		reviewRequired: lipgloss.Color("33"),
+		statusPass:     lipgloss.Color("2"),
+		statusFail:     lipgloss.Color("1"),
+		statusPending:  lipgloss.Color("4"),
 	}
 }
 
@@ -88,12 +76,9 @@ func lightColors() colors {
 		infoBg:         lipgloss.Color("25"),
 		warnBg:         lipgloss.Color("124"),
 		shadowFg:       lipgloss.Color("#cccccc"),
-		statusOpen:     lipgloss.Color("2"),
-		statusClosed:   lipgloss.Color("1"),
-		statusMerged:   lipgloss.Color("4"),
-		reviewApproved: lipgloss.Color("2"),
-		reviewChanges:  lipgloss.Color("1"),
-		reviewRequired: lipgloss.Color("33"),
+		statusPass:     lipgloss.Color("2"),
+		statusFail:     lipgloss.Color("1"),
+		statusPending:  lipgloss.Color("4"),
 	}
 }
 
@@ -129,37 +114,21 @@ func newPalette(c colors) *Palette {
 			Foreground(c.dimFg),
 		StatusSep: lipgloss.NewStyle().
 			Background(c.secondaryBg),
-		PRNumber: lipgloss.NewStyle().
-			Foreground(c.popFg).
+		StatusPass: lipgloss.NewStyle().
+			Foreground(c.statusPass).
 			Bold(true),
-		PRTitle: lipgloss.NewStyle().
-			Foreground(c.primaryFg),
-		PRMeta: lipgloss.NewStyle().
-			Foreground(c.dimFg),
+		StatusFail: lipgloss.NewStyle().
+			Foreground(c.statusFail).
+			Bold(true),
+		StatusPending: lipgloss.NewStyle().
+			Foreground(c.statusPending).
+			Bold(true),
 		PreviewBorder: lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(c.dimFg).
 			BorderBottom(false),
 		PreviewContent: lipgloss.NewStyle().
 			Foreground(c.primaryFg),
-		StatusOpen: lipgloss.NewStyle().
-			Foreground(c.statusOpen).
-			Bold(true),
-		StatusClosed: lipgloss.NewStyle().
-			Foreground(c.statusClosed).
-			Bold(true),
-		StatusMerged: lipgloss.NewStyle().
-			Foreground(c.statusMerged).
-			Bold(true),
-		ReviewApproved: lipgloss.NewStyle().
-			Foreground(c.reviewApproved).
-			Bold(true),
-		ReviewChanges: lipgloss.NewStyle().
-			Foreground(c.reviewChanges).
-			Bold(true),
-		ReviewRequired: lipgloss.NewStyle().
-			Foreground(c.reviewRequired).
-			Bold(true),
 		Notification: lipgloss.NewStyle().
 			Background(c.notificationBg).
 			Foreground(c.notificationFg).
