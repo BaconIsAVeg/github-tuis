@@ -29,7 +29,7 @@ func (m *Model) SetMode(mode string) {
 }
 
 func (m *Model) SetMiddleContent(s string) {
-	m.middleContent = s
+	m.middleContent = " " + s
 }
 
 func (m *Model) SetKeybindings(kb []KeyBinding) {
